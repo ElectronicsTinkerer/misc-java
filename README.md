@@ -1,2 +1,2 @@
 # misc-java
-Random Java code/utilities
+Some of my Java code CLI utilities and programs.

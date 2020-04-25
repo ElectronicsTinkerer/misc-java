@@ -153,7 +153,7 @@ public class FizzBuzz {
                             break;
                         case "-b":
                         case "--buzz":
-                            buzzMultiple = Integer.parseInt(args[i = 1]);
+                            buzzMultiple = Integer.parseInt(args[i + 1]);
                             i++;
                             break;
                         case "--fizzstring":

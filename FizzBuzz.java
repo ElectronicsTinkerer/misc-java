@@ -124,8 +124,6 @@ public class FizzBuzz {
         if (args.length == 0) {
             System.out.println(FizzBuzzGenerator(defaultFizzMultiple, defaultBuzzMultiple, defaultStartNumber,
                     defaultEndNumber, defaultDelimiter, defaultFizzString, defaultBuzzString));
-        } else if (args[0].equals("-h") || args[0].equals("-?") || args[0].equals("--help")) {
-            printHelp();
         } else {
 
             // Setup arguments for the FizzBuzz generation

@@ -117,7 +117,7 @@ public class FizzBuzz {
     /**
      * Runs the FizzBuzz generator
      *
-     * @param args See cli in method definition
+     * @param args See the printHelp() method
      */
     public static void main(String[] args) {
  

@@ -86,15 +86,16 @@ public class TrigTableGenerator {
                 "USAGE:\n" +
                 "$ java TrigTableGenerator [options]\n\n" +
                 "Required Options:\n" +
-                "    -fn function ....... Specify the function table to generate\n" +
-                "                         Options: sin, cos, tan, x2, x3\n" +
-                "    -s steps ........... Number of steps to take when generating table\n" +
-                "    -f value ........... Final (stop) value\n" +
+                "    -fn function ................ Specify the function table to generate\n" +
+                "                                  Options: sin, cos, tan, x2, x3\n" +
+                "    -s, --steps steps ........... Number of steps to take when generating table\n" +
+                "    -f, --final value ........... Final (stop) value\n" +
                 "Optional Options:\n" +
-                "    -a angletype ....... Angle type: deg or rad (default deg)\n" +
-                "    -i value ........... Initial (start) value - default: 0\n" +
-                "    -c cols ............ Number of columns to generate in output array\n" +
-                "    -h ................. Help: Display this menu\n"
+                "    -a, --angle angletype ....... Angle type: deg or rad (default deg)\n" +
+                "    -i, --initial value ......... Initial (start) value - default: 0\n" +
+                "    -c, -cols cols .............. Number of columns to generate in output array\n" +
+                "    -?, -h, --help .............. Help: Display this menu\n" +
+                "    --float ..................... Append an 'f' to the numbers in table\n"
         );
     }
 
@@ -107,6 +108,7 @@ public class TrigTableGenerator {
         double startValue = defaultStartValue;  // Default
         double stopValue = 0;
         int numberOfColumns = defaultColumnQuantity;
+        String appendF = "";
 
         try {
             int i = 0;
@@ -207,6 +209,10 @@ public class TrigTableGenerator {
                         printHelp();
                         System.exit(0);
 
+                    case "--float":
+                        appendF = "f";
+                        break;
+
                     default:
                         System.out.println("Warning: unknown argument, ignoring. " + args[i]);
                         break;
@@ -219,7 +225,7 @@ public class TrigTableGenerator {
         }
 
         // Make sure we have everything we need:
-        if (function == null && totalSteps <= 0 && stopValue <= 0) {
+        if (function == null || totalSteps <= 0 || stopValue <= 0) {
             System.out.println("Error: you are probably missing some arguments, see below:");
             printHelp();
             System.exit(-1);
@@ -235,13 +241,12 @@ public class TrigTableGenerator {
             }
 
             double x = (computationNumber * (stopValue - startValue)) / totalSteps;
-            assert function != null;
             String number = computeExpression(x, function, angleType);
             String paddedNumber;
             if (computationNumber == totalSteps)
-                paddedNumber = String.format("%-25s", number + 'f');
+                paddedNumber = String.format("%-25s", number + appendF);
             else
-                paddedNumber = String.format("%-25s", number + "f,");
+                paddedNumber = String.format("%-25s", number + appendF + ',');
             System.out.print(paddedNumber);
 
             computationNumber++;
